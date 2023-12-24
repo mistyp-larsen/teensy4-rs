@@ -239,6 +239,8 @@ pub struct Resources<Pins> {
     pub lpi2c1: ral::lpi2c::LPI2C1,
     /// The register block for [`Lpi2c3`].
     pub lpi2c3: ral::lpi2c::LPI2C3,
+    /// The register block for [`Lpspi1`].
+    pub lpspi1: ral::lpspi::LPSPI1,
     /// The register block for [`Lpspi4`].
     pub lpspi4: ral::lpspi::LPSPI4,
     /// The register block for [`Lpuart6`].
@@ -358,6 +360,19 @@ pub type Lpi2c1 = hal::lpi2c::Lpi2c<hal::lpi2c::Pins<pins::common::P19, pins::co
 ///
 /// Use [`lpi2c`] to create this driver.
 pub type Lpi2c3 = hal::lpi2c::Lpi2c<hal::lpi2c::Pins<pins::common::P16, pins::common::P17>, 3>;
+
+/// LPSPI4 peripheral.
+///
+/// - Pin 44 is chip select (CS).
+/// - Pin 43 is data out (SDO).
+/// - Pin 42 is data in (SDI).
+/// - Pin 45 is clock (SCK).
+///
+/// Use [`lpspi`] to create this driver.
+pub type Lpspi1 = hal::lpspi::Lpspi<
+    LpspiPins<pins::t41::P43, pins::t41::P42, pins::t41::P45, pins::t41::P44>,
+    1,
+>;
 
 /// LPSPI4 peripheral.
 ///
@@ -593,6 +608,7 @@ fn prepare_resources<Pins>(
         pins,
         lpi2c1: instances.LPI2C1,
         lpi2c3: instances.LPI2C3,
+        lpspi1: instances.LPSPI1,
         lpspi4: instances.LPSPI4,
         lpuart6: instances.LPUART6,
         lpuart4: instances.LPUART4,
